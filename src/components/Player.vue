@@ -10,20 +10,11 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
-
-  data () {
-    return {
-      track: {}
-    }
-  },
-
-  created () {
-    console.log('INiciado Componente Player')
-    this.$bus.$on('set-track', (track) => {
-      console.log('Escuche el evento')
-      this.track = track
-    })
+  computed: {
+    ...mapState(['track'])
   }
 }
 </script>
