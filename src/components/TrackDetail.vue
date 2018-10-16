@@ -1,11 +1,11 @@
 <template lang="pug">
-  .container(v-if="track && track.id")
+  .container(v-if="track && track.album")
     .columns
       .column.is-3.has-text-centered
         figure.media-left
           p.image
             img(:src="track.album.images[0].url")
-          p
+          p.button-bar
             a.button.is-primary.is-large
               span.icon(@click="selectTrack") ▶️
 
@@ -29,6 +29,7 @@
 
 <script>
 import { mapState, mapActions, mapGetters } from 'vuex'
+
 import trackMixin from '@/mixins/track'
 
 export default {
@@ -42,11 +43,9 @@ export default {
   created () {
     const id = this.$route.params.id
 
-    if (!this.track || !this.track.album || this.track.id !== id) {
+    if (!this.track || !this.track.id || this.track.id !== id) {
       this.getTrackById({ id })
-        .then(() => {
-          console.log('Termino la carga del track')
-        })
+        .then(() => console.log('Track loaded...'))
     }
   },
 
@@ -59,5 +58,9 @@ export default {
 <style lang="scss">
   .column {
     margin: 20px;
+  }
+
+  .button-bar {
+    margin-top: 20px;
   }
 </style>

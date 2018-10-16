@@ -1,5 +1,6 @@
 <template lang="pug">
   main
+
     transition(name="move")
       pm-notification(v-show="showNotification")
         p(slot="body") No se encontraron resultados
@@ -26,7 +27,7 @@
         .columns.is-multiline
           .column.is-one-quarter(v-for="t in tracks")
             pm-track(
-              v-blur="t.preview_url"
+              v-blur="t.preview_url",
               :class="{ 'is-active': t.id === selectedTrack }",
               :track="t",
               @select="setSelectedTrack"
